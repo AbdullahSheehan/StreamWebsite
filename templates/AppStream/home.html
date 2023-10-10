@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block body %}
+  {% if search %}
+  <h5 class="mb-4">Search Results for "{{search}}"</h5>
+  {% if results.count == 0 %}
+    <p class="text-muted">No Results Found.</p>
+  {% else %}
+  <div class="container d-flex justify-content-center align-items-center gap-5 flex-wrap w-100">
+    {% for result in results %}
+    <a href="{% url 'AppStream:details' pk=result.pk %}" class="text-decoration-none">
+      <div class="card-inline">
+        <img width="400" height="300" src="/media/{{result.thumbnails}}" alt="{{result.title}}" srcset="" class="rounded mb-2">
+        <p class="text-center fw-bold text-black">{{result.title}}</p>
+      </div>
+    </a>
+    {% endfor %}
+    </div>
+    <hr>
+    <div class="text-muted w-100 text-center">End of Results</div>
+    {% endif %}
+  {% else %}
+  <h5 class="mb-4">All Videos</h5>
+  <div class="">
+    {% for category in categories %}
+      <a href="{% url 'AppStream:category' pk=category.pk %}" class="badge bg-secondary px-3 text-decoration-none mb-5 py-3 px-3 text-lg">{{category.name}}</a>
+    {% endfor %}
+  </div>
+  <div class="container d-flex justify-content-center align-items-center gap-5 flex-wrap w-100">
+    {% for video in videos %}
+    <a href="{% url 'AppStream:details' pk=video.pk %}" class="text-decoration-none">
+      <div class="card-inline">
+        <img width="400" height="300" src="/media/{{video.thumbnails}}" alt="{{video.title}}" srcset="" class="rounded mb-2">
+        <p class="text-center fw-bold text-black">{{video.title}}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+{% endblock body %}

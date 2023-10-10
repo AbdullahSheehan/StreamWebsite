@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+  <h5 class="mb-4">Category : "{{category}}"</h5>
+  <div class="">
+    {% for category in categories %}
+      <a href="#" class="badge bg-secondary px-3 text-decoration-none mb-5 py-3 px-3 text-lg">{{category.name}}</a>
+    {% endfor %}
+  </div>
+  <div class="container d-flex justify-content-center align-items-center gap-5 flex-wrap w-100">
+    {% for video in videocats.vicat.all %}
+    <div class="card-inline ">
+      <iframe width="400" height="300" src="https://www.youtube.com/embed/{{video.get_id}}/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" allowfullscreen class="rounded"></iframe>
+      <p class="text-center fw-bold">{{video.title}}</p>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock body %}
